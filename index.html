@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTieniOS · Check độ nhạy Free Fire</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <style>
+        :root {
+            --primary-gold: #ffd700;
+            --secondary-gold: #f5b041;
+            --dark-bg: #0a0c12;
+            --card-bg: rgba(18, 23, 34, 0.95);
+            --neon-glow: 0 0 20px rgba(255, 215, 0, 0.3);
+            --trial-color: #00d2d3;
+            --month-color: #ff9f43;
+            --fifty-color: #ee5a24;
+            --forever-color: #ffd700;
+            --text-bright: #ffffff;
+            --text-soft: #f0f0f0;
+            --text-muted-bright: #cccccc;
+        }
+
+        body {
+            background: linear-gradient(135deg, #000000, #1a1f2e);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M20 20 L30 30 M70 20 L80 30 M20 70 L30 80 M70 70 L80 80" stroke="%23ffd700" stroke-width="1"/></svg>');
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .main-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass-card {
+            background: rgba(10, 15, 25, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 50px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.3);
+            overflow: hidden;
+            transition: all 0.3s;
+            animation: fadeInUp 1s;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 30px 60px rgba(255, 215, 0, 0.2);
+        }
+
+        .game-header {
+            background: linear-gradient(90deg, #000000, #1a1f2e, #000000);
+            padding: 20px 30px;
+            border-bottom: 2px solid #ffd700;
+            position: relative;
+        }
+
+        .game-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            animation: scanline 2s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .avatar-large {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ffd700, #f5b041);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 800;
+            color: #000;
+            border: 3px solid #fff;
+            box-shadow: 0 0 30px #ffd700;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .device-badge {
+            background: linear-gradient(135deg, #6c5ce7, #a463f5);
+            border-radius: 40px;
+            padding: 8px 20px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 5px 20px #6c5ce7;
+            margin-top: 10px;
+        }
+
+        .device-limit-badge {
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            border-radius: 40px;
+            padding: 5px 15px;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 10px;
+        }
+
+        .zalo-badge {
+            background: linear-gradient(135deg, #0068ff, #00aaff);
+            border-radius: 40px;
+            padding: 8px 20px;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 5px 20px #0068ff;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .zalo-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px #0068ff;
+            color: white;
+        }
+
+        .login-section {
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            transition: all 0.5s;
+        }
+
+        .login-section.hidden {
+            display: none;
+        }
+
+        .main-content {
+            padding: 30px;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .main-content.visible {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* TĂNG ĐỘ SÁNG CHO TẤT CẢ CHỮ */
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff !important;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        p, span, div, label, li {
+            color: #f0f0f0 !important;
+        }
+
+        .text-white-50 {
+            color: #cccccc !important;
+        }
+
+        .text-gold {
+            color: #ffd700 !important;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+
+        .text-warning {
+            color: #ffd700 !important;
+            font-weight: 600;
+        }
+
+        .text-danger {
+            color: #ff6b6b !important;
+            font-weight: 600;
+        }
+
+        .text-success {
+            color: #7fff00 !important;
+            font-weight: 600;
+        }
+
+        .text-info {
+            color: #00d2d3 !important;
+            font-weight: 600;
+        }
+
+        .gold-input-group {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 60px;
+            padding: 5px;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .gold-input-group:focus-within {
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .gold-input {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 16px;
+            padding: 15px 20px;
+            width: 100%;
+        }
+
+        .gold-input:focus {
+            outline: none;
+            background: transparent;
+            color: #ffffff;
+        }
+
+        .gold-input::placeholder {
+            color: #aaaaaa;
+        }
+
+        .purple-input-group {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(108, 92, 231, 0.3);
+            border-radius: 60px;
+            padding: 5px;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .purple-input-group:focus-within {
+            border-color: #6c5ce7;
+            box-shadow: 0 0 20px rgba(108, 92, 231, 0.3);
+        }
+
+        .purple-input {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 16px;
+            padding: 15px 20px;
+            width: 100%;
+        }
+
+        .purple-input:focus {
+            outline: none;
+            background: transparent;
+            color: #ffffff;
+        }
+
+        .purple-input::placeholder {
+            color: #aaaaaa;
+        }
+
+        .gold-button {
+            background: linear-gradient(45deg, #ffd700, #f5b041);
+            border: none;
+            border-radius: 60px;
+            padding: 15px 35px;
+            font-weight: 700;
+            font-size: 16px;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 100%;
+        }
+
+        .gold-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px #ffd700;
+            color: #000;
+        }
+
+        .key-type-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .key-trial {
+            background: #00d2d3;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .key-day {
+            background: #ff9f43;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .key-fifty {
+            background: #ee5a24;
+            color: white;
+            font-weight: 700;
+        }
+
+        .key-forever {
+            background: #ffd700;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .key-admin {
+            background: #ff4757;
+            color: white;
+            font-weight: 700;
+        }
+
+        .expiry-badge {
+            border-radius: 40px;
+            padding: 10px 25px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid #fff3;
+            animation: glow 2s infinite;
+        }
+
+        .expiry-badge.trial {
+            background: linear-gradient(45deg, #00d2d3, #01a3a4);
+            box-shadow: 0 5px 20px #00d2d3;
+            color: white;
+        }
+
+        .expiry-badge.month {
+            background: linear-gradient(45deg, #ff9f43, #feca57);
+            box-shadow: 0 5px 20px #ff9f43;
+            color: white;
+        }
+
+        .expiry-badge.fifty {
+            background: linear-gradient(45deg, #ee5a24, #ff793f);
+            box-shadow: 0 5px 20px #ee5a24;
+            color: white;
+        }
+
+        .expiry-badge.forever {
+            background: linear-gradient(45deg, #ffd700, #f5b041);
+            box-shadow: 0 5px 20px #ffd700;
+            color: #000;
+        }
+
+        .expiry-badge.admin {
+            background: linear-gradient(45deg, #ff4757, #ff6b81);
+            box-shadow: 0 5px 20px #ff4757;
+            color: white;
+        }
+
+        .effect-item-modern {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 30px;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            text-shadow: 0 0 5px rgba(255,255,255,0.3);
+        }
+
+        .effect-item-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .effect-item-modern:hover::before {
+            left: 100%;
+        }
+
+        .effect-item-modern:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+            color: #ffffff;
+        }
+
+        .effect-item-modern.selected {
+            background: linear-gradient(45deg, #ffd700, #f5b041);
+            color: #000;
+            font-weight: 700;
+            border-color: #fff;
+            box-shadow: 0 10px 30px #ffd700;
+            text-shadow: none;
+        }
+
+        .sens-row {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 50px;
+            padding: 15px 25px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            color: #ffffff;
+        }
+
+        .sens-row:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.5);
+            transform: translateX(10px);
+        }
+
+        .sens-row span {
+            color: #ffffff !important;
+            font-weight: 500;
+        }
+
+        .sens-value {
+            background: linear-gradient(45deg, #ffd700, #f5b041);
+            border-radius: 40px;
+            padding: 8px 25px;
+            font-weight: 700;
+            font-size: 18px;
+            color: #000;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .status-bar {
+            background: #0a0f17;
+            border-radius: 60px;
+            padding: 18px 25px;
+            border: 2px solid #ffd70033;
+            color: #7fff00;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: inset 0 0 20px #7fff0033;
+            text-shadow: 0 0 10px #7fff00;
+        }
+
+        .pulse-dot {
+            width: 14px;
+            height: 14px;
+            background: #7fff00;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #7fff00;
+            animation: pulseDot 1.5s infinite;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .admin-panel-modern {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffd700;
+            border-radius: 40px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 0 30px #ffd70033;
+            animation: slideIn 0.5s;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .key-item-modern {
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid #ffd700;
+            border-radius: 50px;
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffd700;
+            font-family: monospace;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .key-item-modern:hover {
+            background: rgba(255, 215, 0, 0.25);
+            transform: scale(1.02);
+        }
+
+        .key-item-modern span {
+            color: #ffd700 !important;
+        }
+
+        .delete-key-btn {
+            background: rgba(255, 71, 87, 0.2);
+            border: 2px solid #ff4757;
+            border-radius: 30px;
+            color: #ff4757;
+            padding: 5px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .delete-key-btn:hover {
+            background: #ff4757;
+            color: white;
+        }
+
+        .alert {
+            color: white !important;
+            font-weight: 500;
+        }
+
+        .alert-warning {
+            background: rgba(255, 193, 7, 0.2) !important;
+            border-color: #ffc107 !important;
+            color: #ffc107 !important;
+        }
+
+        .alert-success {
+            background: rgba(40, 167, 69, 0.2) !important;
+            border-color: #28a745 !important;
+            color: #7fff00 !important;
+        }
+
+        .alert-danger {
+            background: rgba(220, 53, 69, 0.2) !important;
+            border-color: #dc3545 !important;
+            color: #ff6b6b !important;
+        }
+
+        .alert-info {
+            background: rgba(23, 162, 184, 0.2) !important;
+            border-color: #17a2b8 !important;
+            color: #00d2d3 !important;
+        }
+
+        .form-select {
+            color: white !important;
+            background-color: #1a1f2e !important;
+            border-color: #ffd700 !important;
+        }
+
+        .form-select option {
+            background-color: #1a1f2e !important;
+            color: white !important;
+        }
+
+        .form-control {
+            color: white !important;
+            background-color: #1a1f2e !important;
+            border-color: #ffd700 !important;
+        }
+
+        .form-control:focus {
+            color: white !important;
+            background-color: #1a1f2e !important;
+        }
+
+        .btn-outline-warning {
+            color: #ffd700 !important;
+            border-color: #ffd700 !important;
+        }
+
+        .btn-outline-warning:hover {
+            background: #ffd700 !important;
+            color: #000 !important;
+        }
+
+        footer p, footer a {
+            color: #cccccc !important;
+        }
+
+        footer a:hover {
+            color: #ffd700 !important;
+        }
+
+        @media (max-width: 768px) {
+            .glass-card {
+                border-radius: 30px;
+            }
+            
+            .effect-item-modern {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+            
+            .sens-value {
+                padding: 5px 15px;
+                font-size: 14px;
+            }
+        }
+
+        .github-corner {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <!-- GitHub Corner -->
+    <a href="https://github.com/yourusername/gtienios" class="github-corner" target="_blank">
+        <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#ffd700; color:#000; position: absolute; top: 0; right: 0; border: 0;">
+            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+            <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+            <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+        </svg>
+    </a>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="glass-card">
+                        <!-- Header -->
+                        <div class="game-header">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="avatar-large animate__animated animate__bounceIn">
+                                        G
+                                    </div>
+                                    <div>
+                                        <h1 class="display-6 fw-bold" style="color: #ffd700 !important; text-shadow: 0 0 20px #ffd700;">GTieniOS</h1>
+                                        <p class="mb-0" style="color: #cccccc !important;"><i class="bi bi-shield-check" style="color: #ffd700;"></i> Chuẩn Free Fire · Bảo mật cao</p>
+                                        <!-- Device Name Display -->
+                                        <div id="deviceDisplay" class="device-badge mt-2" style="display: none;">
+                                            <i class="bi bi-phone"></i>
+                                            <span id="deviceNameDisplay"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <!-- Zalo Contact -->
+                                    <a href="https://zalo.me/0833863315" target="_blank" class="zalo-badge">
+                                        <i class="bi bi-chat-dots-fill"></i>
+                                        0833863315
+                                    </a>
+                                    <div id="headerExpiry" class="mt-2"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Thông báo GitHub Pages -->
+                        <div class="alert alert-info m-3" role="alert" style="color: #00d2d3 !important;">
+                            <i class="bi bi-github" style="color: #00d2d3;"></i> 
+                            Đang chạy trên <strong>GitHub Pages</strong> - Dữ liệu được lưu trên trình duyệt của bạn.
+                            <button class="btn btn-sm btn-outline-light float-end" onclick="window.location.reload()">
+                                <i class="bi bi-arrow-repeat"></i>
+                            </button>
+                        </div>
+
+                        <!-- LOGIN SECTION -->
+                        <div id="loginSection" class="login-section">
+                            <div class="text-center mb-5">
+                                <i class="bi bi-key-fill" style="font-size: 60px; color: #ffd700;"></i>
+                                <h2 class="mt-3" style="color: #ffffff !important;">ĐĂNG NHẬP HỆ THỐNG</h2>
+                                <p style="color: #cccccc !important;">Nhập thông tin để kích hoạt tính năng</p>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-md-8">
+                                    <!-- Form đăng nhập -->
+                                    <form id="loginForm" onsubmit="return false;">
+                                        <!-- Tên thiết bị -->
+                                        <div class="mb-4">
+                                            <label class="mb-2" style="color: #cccccc !important;"><i class="bi bi-phone" style="color: #6c5ce7;"></i> TÊN THIẾT BỊ</label>
+                                            <div class="purple-input-group">
+                                                <input type="text" class="purple-input" id="deviceNameInput" placeholder="VD: iPhone 13 Pro Max, Samsung S23..." autocomplete="off">
+                                            </div>
+                                        </div>
+
+                                        <!-- Key kích hoạt -->
+                                        <div class="mb-4">
+                                            <label class="mb-2" style="color: #cccccc !important;"><i class="bi bi-key" style="color: #ffd700;"></i> KEY KÍCH HOẠT</label>
+                                            <div class="gold-input-group">
+                                                <input type="text" class="gold-input" id="loginKeyInput" placeholder="Nhập key của bạn..." autocomplete="off">
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="gold-button" id="loginBtn">
+                                            <i class="bi bi-box-arrow-in-right"></i> ĐĂNG NHẬP
+                                        </button>
+                                    </form>
+                                    
+                                    <div class="text-center mt-4">
+                                        <div class="alert alert-warning bg-transparent d-flex align-items-center" role="alert" id="loginMessage">
+                                            <i class="bi bi-info-circle me-2"></i>
+                                            <span>Vui lòng nhập đầy đủ thông tin</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hướng dẫn nhanh - ĐÃ BỎ DÒNG KEY ADMIN -->
+                                    <div class="mt-4 p-3 rounded" style="background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.2);">
+                                        <p class="mb-2" style="color: #ffd700 !important;"><i class="bi bi-question-circle"></i> Hướng dẫn:</p>
+                                        <ul class="small" style="color: #cccccc !important;">
+                                            <li>Nhập tên thiết bị bạn đang sử dụng</li>
+                                            <li>Nhập key được cấp để đăng nhập</li>
+                                            <li>Liên hệ Admin qua Zalo: <strong style="color: #ffd700 !important;">0833863315</strong> để được cấp key</li>
+                                            <li>Mỗi key có giới hạn thiết bị riêng (2, 5, 10, ∞)</li>
+                                            <li>Dữ liệu được lưu trên trình duyệt của bạn</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MAIN CONTENT SECTION -->
+                        <div id="mainContent" class="main-content">
+                            <!-- Expiry Info -->
+                            <div class="d-flex justify-content-between align-items-center mb-4" id="expiryContainer">
+                                <!-- Expiry sẽ được thêm bằng JS -->
+                            </div>
+
+                            <!-- Admin Panel (chỉ hiện với admin) -->
+                            <div id="adminPanel" class="admin-panel-modern" style="display: none;">
+                                <h4 class="mb-4" style="color: #ffd700 !important;"><i class="bi bi-gear-fill"></i> QUẢN LÝ KEY</h4>
+                                
+                                <!-- Danh sách key -->
+                                <div id="keyList" class="mb-4">
+                                    <!-- Keys will be rendered here -->
+                                </div>
+                                
+                                <!-- Thêm key mới -->
+                                <div class="mb-3">
+                                    <label class="mb-2" style="color: #cccccc !important;">LOẠI KEY</label>
+                                    <select id="keyTypeSelect" class="form-select bg-dark text-white border-gold">
+                                        <option value="1">Key 1 ngày (2 TB)</option>
+                                        <option value="30">Key 30 ngày (2 TB)</option>
+                                        <option value="50">Key 50 ngày (2 TB)</option>
+                                        <option value="forever-2">Key vĩnh viễn (2 TB)</option>
+                                        <option value="forever-5">Key vĩnh viễn (5 TB)</option>
+                                        <option value="forever-10">Key vĩnh viễn (10 TB)</option>
+                                        <option value="forever-unlimited">Key vĩnh viễn (∞ TB)</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-dark text-white border-gold" id="newKeyInput" placeholder="Nhập key mới...">
+                                    <button class="btn btn-warning" id="addKeyBtn">
+                                        <i class="bi bi-plus-lg"></i> THÊM KEY
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Hiệu ứng mong muốn -->
+                            <div class="mb-4">
+                                <h5 class="mb-3" style="color: #ffd700 !important;"><i class="bi bi-stars"></i> HIỆU QUẢ MONG MUỐN</h5>
+                                <div class="row g-2">
+                                    <div class="col-3">
+                                        <div class="effect-item-modern" data-effect="nhe-tam">
+                                            <i class="bi bi-wind"></i> Nhẹ Tâm
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="effect-item-modern" data-effect="fix-rung">
+                                            <i class="bi bi-phone"></i> Fix Rung
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="effect-item-modern" data-effect="giam-lo">
+                                            <i class="bi bi-lightning"></i> Giảm lố
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="effect-item-modern" data-effect="on-dinh">
+                                            <i class="bi bi-bullseye"></i> Ổn Định
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="effect-item-modern" data-effect="one-shot">
+                                            <i class="bi bi-crosshair"></i> One Shot
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="effect-item-modern" data-effect="toi-uu-fps">
+                                            <i class="bi bi-speedometer"></i> Tối ưu FPS
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="effect-item-modern" data-effect="do-hoa-max">
+                                            <i class="bi bi-display"></i> Đồ họa Max
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Độ nhạy chi tiết -->
+                            <div class="mb-4">
+                                <h5 class="mb-3" style="color: #ffd700 !important;"><i class="bi bi-sliders2"></i> THÔNG SỐ ĐỘ NHẠY</h5>
+                                
+                                <div class="sens-row d-flex justify-content-between align-items-center">
+                                    <span><i class="bi bi-arrow-left-right" style="color: #ffd700;"></i> Nhìn xung quanh</span>
+                                    <span class="sens-value" id="general-value">85</span>
+                                </div>
+                                
+                                <div class="sens-row d-flex justify-content-between align-items-center">
+                                    <span><i class="bi bi-crosshair" style="color: #ffd700;"></i> Ống ngắm hồng tâm</span>
+                                    <span class="sens-value" id="reddot-value">72</span>
+                                </div>
+                                
+                                <div class="sens-row d-flex justify-content-between align-items-center">
+                                    <span><i class="bi bi-2-square" style="color: #ffd700;"></i> Ống ngắm 2x</span>
+                                    <span class="sens-value" id="scope2x-value">68</span>
+                                </div>
+                                
+                                <div class="sens-row d-flex justify-content-between align-items-center">
+                                    <span><i class="bi bi-4-square" style="color: #ffd700;"></i> Ống ngắm 4x</span>
+                                    <span class="sens-value" id="scope4x-value">60</span>
+                                </div>
+                                
+                                <div class="sens-row d-flex justify-content-between align-items-center">
+                                    <span><i class="bi bi-binoculars" style="color: #ffd700;"></i> Ống ngắm súng ngắm</span>
+                                    <span class="sens-value" id="scope-sniper-value">55</span>
+                                </div>
+                                
+                                <div class="sens-row d-flex justify-content-between align-items-center">
+                                    <span><i class="bi bi-camera-reels" style="color: #ffd700;"></i> Nút camera tự do</span>
+                                    <span class="sens-value" id="camera-value">90</span>
+                                </div>
+                                
+                                <div class="sens-row d-flex justify-content-between align-items-center">
+                                    <span><i class="bi bi-phone-flip" style="color: #ffd700;"></i> Gyroscope</span>
+                                    <span class="sens-value" id="gyro-value">210</span>
+                                </div>
+                            </div>
+
+                            <!-- Status Bar -->
+                            <div class="status-bar mb-4">
+                                <span class="pulse-dot"></span>
+                                <span id="status-message" class="flex-grow-1">⚙️ System Ready</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="d-flex gap-3">
+                                <button class="gold-button flex-grow-1" id="applySensBtn">
+                                    <i class="bi bi-check-circle"></i> ÁP DỤNG
+                                </button>
+                                <button class="btn btn-outline-warning" id="logoutBtn">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="text-center p-4 border-top border-warning border-opacity-25">
+                            <p class="mb-0" style="color: #cccccc !important;">
+                                <i class="bi bi-c-circle"></i> GTieniOS Chuẩn · 
+                                <span id="currentTime"></span> · 
+                                <a href="https://zalo.me/0833863315" class="text-warning text-decoration-none" style="color: #ffd700 !important;">
+                                    <i class="bi bi-chat-dots-fill"></i> 0833863315
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        (function() {
+            // ===== CONFIG =====
+            const ADMIN_KEY = "GTieniOS@2024";
+            
+            // ===== STATE =====
+            let validKeys = [];
+            let isKeyValid = false;
+            let isAdmin = false;
+            let currentKey = null;
+            let currentKeyType = '';
+            let currentKeyDevices = [];
+            let currentMaxDevices = 2;
+            let expiryDate = null;
+            let deviceName = '';
+            
+            // ===== ELEMENTS =====
+            const loginSection = document.getElementById('loginSection');
+            const mainContent = document.getElementById('mainContent');
+            const loginForm = document.getElementById('loginForm');
+            const loginBtn = document.getElementById('loginBtn');
+            const deviceNameInput = document.getElementById('deviceNameInput');
+            const loginKeyInput = document.getElementById('loginKeyInput');
+            const loginMessage = document.getElementById('loginMessage');
+            const adminPanel = document.getElementById('adminPanel');
+            const keyList = document.getElementById('keyList');
+            const newKeyInput = document.getElementById('newKeyInput');
+            const keyTypeSelect = document.getElementById('keyTypeSelect');
+            const addKeyBtn = document.getElementById('addKeyBtn');
+            const applyBtn = document.getElementById('applySensBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const statusMsg = document.getElementById('status-message');
+            const expiryContainer = document.getElementById('expiryContainer');
+            const headerExpiry = document.getElementById('headerExpiry');
+            const deviceDisplay = document.getElementById('deviceDisplay');
+            const deviceNameDisplay = document.getElementById('deviceNameDisplay');
+            
+            // Effect items
+            const effectItems = document.querySelectorAll('.effect-item-modern');
+            const generalEl = document.getElementById('general-value');
+            const reddotEl = document.getElementById('reddot-value');
+            const scope2xEl = document.getElementById('scope2x-value');
+            const scope4xEl = document.getElementById('scope4x-value');
+            const scopeSniperEl = document.getElementById('scope-sniper-value');
+            const cameraEl = document.getElementById('camera-value');
+            const gyroEl = document.getElementById('gyro-value');
+            
+            // Sensitivity presets
+            const sensitivityPresets = {
+                'nhe-tam': {
+                    general: 95, reddot: 88, scope2x: 82, scope4x: 75, scopeSniper: 70, camera: 92, gyro: 250,
+                    message: '🍃 Nhẹ Tâm: Cảm giác aim nhẹ nhàng, linh hoạt'
+                },
+                'fix-rung': {
+                    general: 72, reddot: 65, scope2x: 60, scope4x: 52, scopeSniper: 48, camera: 70, gyro: 185,
+                    message: '📳 Fix Rung: Hạn chế rung lắc, giữ crosshair ổn định'
+                },
+                'giam-lo': {
+                    general: 68, reddot: 60, scope2x: 55, scope4x: 48, scopeSniper: 45, camera: 65, gyro: 165,
+                    message: '⚡ Giảm lố: Kiểm soát độ giật tốt'
+                },
+                'on-dinh': {
+                    general: 82, reddot: 75, scope2x: 70, scope4x: 62, scopeSniper: 58, camera: 80, gyro: 205,
+                    message: '🎯 Ổn Định: Cân bằng độ chính xác'
+                },
+                'one-shot': {
+                    general: 78, reddot: 70, scope2x: 65, scope4x: 55, scopeSniper: 52, camera: 75, gyro: 195,
+                    message: '🔫 One Shot: Tinh chỉnh Shotgun/Sniper'
+                },
+                'toi-uu-fps': {
+                    general: 88, reddot: 80, scope2x: 75, scope4x: 68, scopeSniper: 65, camera: 85, gyro: 225,
+                    message: '📈 Tối ưu FPS: Tăng mượt mà'
+                },
+                'do-hoa-max': {
+                    general: 92, reddot: 85, scope2x: 80, scope4x: 72, scopeSniper: 68, camera: 88, gyro: 235,
+                    message: '🖼️ Đồ họa Max: Cấu hình cao'
+                }
+            };
+            
+            // ===== STORAGE FUNCTIONS =====
+            function loadKeysFromStorage() {
+                const stored = localStorage.getItem('gtienios_validKeys');
+                if (stored) {
+                    try {
+                        validKeys = JSON.parse(stored);
+                    } catch {
+                        validKeys = [];
+                    }
+                } else {
+                    // KHÔNG có key mẫu - để trống hoàn toàn
+                    validKeys = [];
+                    saveKeysToStorage();
+                }
+            }
+            
+            function saveKeysToStorage() {
+                localStorage.setItem('gtienios_validKeys', JSON.stringify(validKeys));
+            }
+            
+            function saveLoginState(key, type, maxDevices, expiry, device) {
+                localStorage.setItem('gtienios_currentKey', key);
+                localStorage.setItem('gtienios_keyType', type);
+                localStorage.setItem('gtienios_maxDevices', maxDevices);
+                localStorage.setItem('gtienios_deviceName', device);
+                
+                if (expiry) {
+                    localStorage.setItem('gtienios_expiry', expiry);
+                } else {
+                    localStorage.removeItem('gtienios_expiry');
+                }
+            }
+            
+            function clearLoginState() {
+                localStorage.removeItem('gtienios_currentKey');
+                localStorage.removeItem('gtienios_keyType');
+                localStorage.removeItem('gtienios_maxDevices');
+                localStorage.removeItem('gtienios_expiry');
+                localStorage.removeItem('gtienios_deviceName');
+            }
+            
+            // ===== DEVICE MANAGEMENT =====
+            function registerDeviceForKey(keyObj, deviceName) {
+                if (!keyObj.devices) {
+                    keyObj.devices = [];
+                }
+                
+                const maxDevices = keyObj.maxDevices || 2;
+                const existingDevice = keyObj.devices.find(d => d.name === deviceName);
+                
+                if (existingDevice) {
+                    existingDevice.lastLogin = new Date().toISOString();
+                    return { success: true, message: 'Đăng nhập từ thiết bị đã đăng ký' };
+                }
+                
+                if (keyObj.devices.length >= maxDevices) {
+                    return { 
+                        success: false, 
+                        message: `Key đã sử dụng tối đa ${maxDevices} thiết bị. Vui lòng liên hệ Admin để được hỗ trợ.` 
+                    };
+                }
+                
+                keyObj.devices.push({
+                    name: deviceName,
+                    lastLogin: new Date().toISOString()
+                });
+                
+                saveKeysToStorage();
+                return { success: true, message: 'Đã đăng ký thiết bị mới' };
+            }
+            
+            // ===== EXPIRY FUNCTIONS =====
+            function setExpiryDate(days) {
+                if (!days || days === 'forever') return null;
+                const date = new Date();
+                date.setDate(date.getDate() + parseInt(days));
+                return date.toISOString();
+            }
+            
+            function getDaysRemaining(expiryDateStr) {
+                if (!expiryDateStr) return null;
+                const expiry = new Date(expiryDateStr);
+                const now = new Date();
+                const diff = expiry - now;
+                return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+            }
+            
+            function updateExpiryDisplay() {
+                if (currentKeyType === 'admin') {
+                    const expiryHtml = `
+                        <div class="expiry-badge admin">
+                            <i class="bi bi-shield-lock"></i>
+                            Admin · ${currentKeyDevices.length}/∞ TB
+                        </div>
+                    `;
+                    expiryContainer.innerHTML = expiryHtml;
+                    headerExpiry.innerHTML = '<span class="badge bg-danger">Admin</span>';
+                    return;
+                }
+                
+                if (currentKeyType && currentKeyType.includes('forever')) {
+                    const deviceCount = currentKeyDevices ? currentKeyDevices.length : 0;
+                    const maxDisplay = currentMaxDevices === 999999 ? '∞' : currentMaxDevices;
+                    const foreverHtml = `
+                        <div class="expiry-badge forever">
+                            <i class="bi bi-infinity"></i>
+                            Vĩnh viễn · ${deviceCount}/${maxDisplay} TB
+                        </div>
+                    `;
+                    expiryContainer.innerHTML = foreverHtml;
+                    headerExpiry.innerHTML = '<span class="badge bg-warning">Vĩnh viễn</span>';
+                    return;
+                }
+                
+                if (!expiryDate) return;
+                
+                const daysLeft = getDaysRemaining(expiryDate);
+                const expiryDateObj = new Date(expiryDate);
+                const dateStr = expiryDateObj.toLocaleDateString('vi-VN');
+                const deviceCount = currentKeyDevices ? currentKeyDevices.length : 0;
+                
+                let badgeClass = 'month';
+                let bgClass = 'warning';
+                
+                if (daysLeft <= 7) {
+                    badgeClass = 'trial';
+                    bgClass = 'info';
+                } else if (daysLeft <= 30) {
+                    badgeClass = 'month';
+                    bgClass = 'warning';
+                } else {
+                    badgeClass = 'fifty';
+                    bgClass = 'danger';
+                }
+                
+                const expiryHtml = `
+                    <div class="expiry-badge ${badgeClass}">
+                        <i class="bi bi-clock-history"></i>
+                        Còn: ${daysLeft} ngày (${dateStr}) · ${deviceCount}/${currentMaxDevices} TB
+                    </div>
+                `;
+                
+                expiryContainer.innerHTML = expiryHtml;
+                headerExpiry.innerHTML = `<span class="badge bg-${bgClass}">${daysLeft} ngày</span>`;
+            }
+            
+            // ===== UI FUNCTIONS =====
+            function showMainContent() {
+                loginSection.style.display = 'none';
+                mainContent.classList.add('visible');
+                
+                // Hiển thị tên thiết bị
+                if (deviceName) {
+                    deviceNameDisplay.textContent = deviceName;
+                    deviceDisplay.style.display = 'inline-flex';
+                }
+                
+                if (isAdmin) {
+                    adminPanel.style.display = 'block';
+                    renderKeyList();
+                } else {
+                    adminPanel.style.display = 'none';
+                }
+                
+                updateExpiryDisplay();
+                
+                // Chọn hiệu ứng mặc định
+                if (!document.querySelector('.effect-item-modern.selected')) {
+                    effectItems[0].classList.add('selected');
+                    const preset = sensitivityPresets['nhe-tam'];
+                    updateSensitivityValues(preset);
+                    statusMsg.textContent = '⚙️ ' + preset.message;
+                }
+            }
+            
+            function showLoginSection() {
+                loginSection.style.display = 'block';
+                mainContent.classList.remove('visible');
+                adminPanel.style.display = 'none';
+                deviceDisplay.style.display = 'none';
+            }
+            
+            function updateSensitivityValues(preset) {
+                generalEl.textContent = preset.general;
+                reddotEl.textContent = preset.reddot;
+                scope2xEl.textContent = preset.scope2x;
+                scope4xEl.textContent = preset.scope4x;
+                scopeSniperEl.textContent = preset.scopeSniper;
+                cameraEl.textContent = preset.camera;
+                gyroEl.textContent = preset.gyro;
+            }
+            
+            // ===== KEY MANAGEMENT =====
+            function renderKeyList() {
+                if (!isAdmin) return;
+                
+                let html = '';
+                validKeys.forEach((keyObj, index) => {
+                    // Xác định loại key và số thiết bị
+                    let typeClass = 'key-day';
+                    let typeText = '';
+                    
+                    if (keyObj.type === '1') {
+                        typeClass = 'key-trial';
+                        typeText = '1 ngày';
+                    } else if (keyObj.type === '30') {
+                        typeClass = 'key-day';
+                        typeText = '30 ngày';
+                    } else if (keyObj.type === '50') {
+                        typeClass = 'key-fifty';
+                        typeText = '50 ngày';
+                    } else if (keyObj.type === 'forever-2') {
+                        typeClass = 'key-forever';
+                        typeText = 'Vĩnh viễn (2 TB)';
+                    } else if (keyObj.type === 'forever-5') {
+                        typeClass = 'key-forever';
+                        typeText = 'Vĩnh viễn (5 TB)';
+                    } else if (keyObj.type === 'forever-10') {
+                        typeClass = 'key-forever';
+                        typeText = 'Vĩnh viễn (10 TB)';
+                    } else if (keyObj.type === 'forever-unlimited') {
+                        typeClass = 'key-forever';
+                        typeText = 'Vĩnh viễn (∞ TB)';
+                    }
+                    
+                    const deviceCount = keyObj.devices ? keyObj.devices.length : 0;
+                    const maxDevices = keyObj.maxDevices || 2;
+                    const maxDisplay = maxDevices === 999999 ? '∞' : maxDevices;
+                    
+                    html += `
+                        <div class="key-item-modern">
+                            <span>
+                                <i class="bi bi-key"></i> ${keyObj.key}
+                                <span class="key-type-badge ${typeClass}">${typeText}</span>
+                                <span class="device-limit-badge">
+                                    <i class="bi bi-phone"></i> ${deviceCount}/${maxDisplay}
+                                </span>
+                            </span>
+                            <span class="delete-key-btn" onclick="deleteKey(${index})">
+                                <i class="bi bi-trash"></i> Xóa
+                            </span>
+                        </div>
+                    `;
+                });
+                
+                if (validKeys.length === 0) {
+                    html = '<div class="text-warning text-center p-3" style="color: #ffd700 !important;">Chưa có key nào. Hãy thêm key mới!</div>';
+                }
+                
+                keyList.innerHTML = html;
+            }
+            
+            window.deleteKey = function(index) {
+                if (!isAdmin) return;
+                validKeys.splice(index, 1);
+                saveKeysToStorage();
+                renderKeyList();
+                showLoginMessage('Đã xóa key thành công', 'success');
+            };
+            
+            function checkKey(inputKey) {
+                // Kiểm tra key admin
+                if (inputKey === ADMIN_KEY) {
+                    isAdmin = true;
+                    isKeyValid = true;
+                    currentKey = inputKey;
+                    currentKeyType = 'admin';
+                    currentKeyDevices = [];
+                    currentMaxDevices = 999999;
+                    expiryDate = setExpiryDate(365);
+                    saveLoginState(inputKey, 'admin', 999999, expiryDate, deviceName);
+                    return true;
+                }
+                
+                // Kiểm tra trong danh sách key
+                const foundIndex = validKeys.findIndex(k => k.key === inputKey);
+                if (foundIndex !== -1) {
+                    const keyObj = validKeys[foundIndex];
+                    
+                    // Kiểm tra đăng ký thiết bị
+                    const registerResult = registerDeviceForKey(keyObj, deviceName);
+                    
+                    if (!registerResult.success) {
+                        showLoginMessage(registerResult.message, 'danger');
+                        return false;
+                    }
+                    
+                    isAdmin = false;
+                    isKeyValid = true;
+                    currentKey = keyObj.key;
+                    currentKeyType = keyObj.type;
+                    currentKeyDevices = keyObj.devices || [];
+                    currentMaxDevices = keyObj.maxDevices || 2;
+                    
+                    // Xử lý expiry date
+                    if (keyObj.type.includes('forever')) {
+                        expiryDate = null;
+                        saveLoginState(keyObj.key, keyObj.type, keyObj.maxDevices, null, deviceName);
+                    } else {
+                        expiryDate = setExpiryDate(parseInt(keyObj.type));
+                        saveLoginState(keyObj.key, keyObj.type, keyObj.maxDevices, expiryDate, deviceName);
+                    }
+                    
+                    // Cập nhật lại trong mảng
+                    validKeys[foundIndex] = keyObj;
+                    saveKeysToStorage();
+                    
+                    return true;
+                }
+                
+                return false;
+            }
+            
+            function showLoginMessage(message, type = 'warning') {
+                loginMessage.innerHTML = `
+                    <i class="bi bi-${type === 'success' ? 'check-circle' : type === 'danger' ? 'exclamation-circle' : 'info-circle'} me-2"></i>
+                    <span>${message}</span>
+                `;
+                loginMessage.className = `alert alert-${type} bg-transparent d-flex align-items-center`;
+            }
+            
+            // ===== CHECK SAVED LOGIN =====
+            function checkSavedLogin() {
+                const savedKey = localStorage.getItem('gtienios_currentKey');
+                const savedType = localStorage.getItem('gtienios_keyType');
+                const savedMaxDevices = parseInt(localStorage.getItem('gtienios_maxDevices') || '2');
+                const savedExpiry = localStorage.getItem('gtienios_expiry');
+                const savedDevice = localStorage.getItem('gtienios_deviceName');
+                
+                if (!savedKey) return false;
+                
+                if (savedType === 'admin' && savedKey === ADMIN_KEY) {
+                    isAdmin = true;
+                    isKeyValid = true;
+                    currentKey = savedKey;
+                    currentKeyType = 'admin';
+                    currentKeyDevices = [];
+                    currentMaxDevices = 999999;
+                    expiryDate = savedExpiry;
+                    deviceName = savedDevice || '';
+                    
+                    if (getDaysRemaining(expiryDate) <= 0) {
+                        clearLoginState();
+                        return false;
+                    }
+                    return true;
+                }
+                
+                // Kiểm tra key thường
+                const found = validKeys.find(k => k.key === savedKey);
+                if (found) {
+                    // Kiểm tra thiết bị có trong danh sách không
+                    const deviceExists = found.devices && found.devices.some(d => d.name === savedDevice);
+                    
+                    if (!deviceExists) {
+                        clearLoginState();
+                        return false;
+                    }
+                    
+                    isAdmin = false;
+                    isKeyValid = true;
+                    currentKey = savedKey;
+                    currentKeyType = found.type;
+                    currentKeyDevices = found.devices || [];
+                    currentMaxDevices = found.maxDevices || 2;
+                    deviceName = savedDevice || '';
+                    
+                    if (found.type.includes('forever')) {
+                        expiryDate = null;
+                        return true;
+                    } else {
+                        expiryDate = savedExpiry;
+                        if (getDaysRemaining(expiryDate) <= 0) {
+                            clearLoginState();
+                            return false;
+                        }
+                        return true;
+                    }
+                }
+                
+                return false;
+            }
+            
+            // ===== EVENT LISTENERS =====
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                loginBtn.click();
+            });
+            
+            loginBtn.addEventListener('click', function() {
+                const inputDevice = deviceNameInput.value.trim();
+                const inputKey = loginKeyInput.value.trim();
+                
+                if (!inputDevice) {
+                    showLoginMessage('Vui lòng nhập tên thiết bị', 'warning');
+                    return;
+                }
+                
+                if (!inputKey) {
+                    showLoginMessage('Vui lòng nhập key', 'warning');
+                    return;
+                }
+                
+                deviceName = inputDevice;
+                
+                if (checkKey(inputKey)) {
+                    showLoginMessage('Đăng nhập thành công!', 'success');
+                    setTimeout(() => showMainContent(), 500);
+                }
+                // Không xóa input để giữ lại nếu đăng nhập thất bại
+            });
+            
+            loginKeyInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') loginBtn.click();
+            });
+            
+            deviceNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') loginBtn.click();
+            });
+            
+            addKeyBtn.addEventListener('click', function() {
+                if (!isAdmin) return;
+                
+                const newKey = newKeyInput.value.trim();
+                const keyType = keyTypeSelect.value;
+                
+                if (!newKey) {
+                    alert('Vui lòng nhập key mới');
+                    return;
+                }
+                
+                if (validKeys.some(k => k.key === newKey)) {
+                    alert('Key đã tồn tại');
+                    return;
+                }
+                
+                // Xác định maxDevices dựa trên loại key
+                let maxDevices = 2;
+                if (keyType === 'forever-5') maxDevices = 5;
+                else if (keyType === 'forever-10') maxDevices = 10;
+                else if (keyType === 'forever-unlimited') maxDevices = 999999;
+                
+                validKeys.push({
+                    key: newKey,
+                    type: keyType,
+                    maxDevices: maxDevices,
+                    devices: [] // Khởi tạo mảng thiết bị rỗng
+                });
+                
+                saveKeysToStorage();
+                renderKeyList();
+                newKeyInput.value = '';
+                showLoginMessage('Đã thêm key thành công', 'success');
+            });
+            
+            // Effect click
+            effectItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (!isKeyValid) return;
+                    
+                    effectItems.forEach(el => el.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    const effect = this.getAttribute('data-effect');
+                    const preset = sensitivityPresets[effect];
+                    
+                    if (preset) {
+                        updateSensitivityValues(preset);
+                        statusMsg.textContent = '⚙️ ' + preset.message;
+                    }
+                });
+            });
+            
+            // Apply button
+            applyBtn.addEventListener('click', function() {
+                if (!isKeyValid) return;
+                
+                const selected = document.querySelector('.effect-item-modern.selected');
+                const effectName = selected ? selected.innerText.trim() : 'Mặc định';
+                
+                let keyTypeText = '';
+                if (currentKeyType === 'admin') {
+                    keyTypeText = 'Admin';
+                } else if (currentKeyType === '1') {
+                    keyTypeText = '1 ngày';
+                } else if (currentKeyType === '30') {
+                    keyTypeText = '30 ngày';
+                } else if (currentKeyType === '50') {
+                    keyTypeText = '50 ngày';
+                } else if (currentKeyType === 'forever-2') {
+                    keyTypeText = 'Vĩnh viễn (2 TB)';
+                } else if (currentKeyType === 'forever-5') {
+                    keyTypeText = 'Vĩnh viễn (5 TB)';
+                } else if (currentKeyType === 'forever-10') {
+                    keyTypeText = 'Vĩnh viễn (10 TB)';
+                } else if (currentKeyType === 'forever-unlimited') {
+                    keyTypeText = 'Vĩnh viễn (∞ TB)';
+                }
+                
+                const deviceCount = currentKeyDevices ? currentKeyDevices.length : 0;
+                const maxDisplay = currentMaxDevices === 999999 ? '∞' : currentMaxDevices;
+                
+                statusMsg.innerHTML = `✅ ĐÃ ÁP DỤNG: ${effectName} | Key: ${keyTypeText} (${deviceCount}/${maxDisplay} TB) | Thiết bị: ${deviceName}`;
+                
+                // Hiệu ứng
+                applyBtn.style.transform = 'scale(0.95)';
+                setTimeout(() => applyBtn.style.transform = '', 100);
+            });
+            
+            // Logout
+            logoutBtn.addEventListener('click', function() {
+                clearLoginState();
+                isKeyValid = false;
+                isAdmin = false;
+                currentKey = null;
+                currentKeyType = '';
+                currentKeyDevices = [];
+                deviceName = '';
+                showLoginSection();
+                showLoginMessage('Đã đăng xuất. Vui lòng nhập thông tin để tiếp tục', 'warning');
+            });
+            
+            // Time update
+            function updateTime() {
+                const now = new Date();
+                document.getElementById('currentTime').innerText = now.toLocaleTimeString('vi-VN');
+            }
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            // ===== INIT =====
+            loadKeysFromStorage();
+            
+            if (checkSavedLogin()) {
+                showMainContent();
+            } else {
+                showLoginSection();
+            }
+        })();
+    </script>
+</body>
+</html>
